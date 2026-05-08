@@ -11,7 +11,7 @@
 | `simple_cnn` | `src/models.py` 中的 `SimpleCIFARNet` | `python train.py --dataset cifar10 --model simple_cnn` |
 | `resnet18` | `src/models.py` 中的 `build_model` | `python train.py --dataset cifar10 --model resnet18` |
 | `resnet50` | `src/models.py` 中的 `build_model` | `python train.py --dataset cifar10 --model resnet50` |
-| `vgg16` | `src/models.py` 中的 `build_model` | `python train.py --dataset cifar10 --model vgg16` |
+| `vgg16` | `src/models.py` 中的 `build_model`（实际使用 `vgg16_bn` + CIFAR 分类头） | `python train.py --dataset cifar10 --model vgg16` |
 | `densenet121` | `src/models.py` 中的 `build_model` | `python train.py --dataset cifar10 --model densenet121` |
 
 ## 快速开始
@@ -37,3 +37,19 @@ python train.py --dataset cifar10 --model resnet18
 - `src/lit_module.py`：Lightning 训练封装
 - `configs/cifar.yaml`：默认配置
 - `docs/experiment.md`：实验过程记录模板
+
+## 常见问题
+
+如果出现类似报错：
+
+`adaptive_avg_pool2d_backward_cuda does not have a deterministic implementation`
+
+说明当前模型在严格确定性模式下不支持某些 CUDA 算子。可用以下任一方式：
+
+1. 使用默认配置（已设为 `deterministic: warn`）。
+2. 命令行显式关闭确定性：
+   `python train.py --dataset cifar10 --model vgg16 --deterministic false`
+
+如果某次实验结果异常低（例如约 10%），建议先删除该模型旧 checkpoint 再重跑，避免和旧实验文件混淆：
+
+`rm -rf checkpoints/cifar10/vgg16`

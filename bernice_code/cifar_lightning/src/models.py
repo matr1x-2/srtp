@@ -60,8 +60,17 @@ def _build_resnet(factory: Callable[..., nn.Module], num_classes: int) -> nn.Mod
 
 
 def _build_vgg16(num_classes: int) -> nn.Module:
-    model = _instantiate(models.vgg16)
-    model.classifier[6] = nn.Linear(model.classifier[6].in_features, num_classes)
+    # Use BN variant and CIFAR-friendly classifier head.
+    # Torchvision VGG uses AdaptiveAvgPool2d((7, 7)) by default, which is
+    # designed for ImageNet-sized inputs and leads to a huge FC head on 32x32.
+    model = _instantiate(models.vgg16_bn)
+    model.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+    model.classifier = nn.Sequential(
+        nn.Linear(512, 512),
+        nn.ReLU(True),
+        nn.Dropout(p=0.5),
+        nn.Linear(512, num_classes),
+    )
     return model
 
 
@@ -92,4 +101,3 @@ def build_model(model_name: str, num_classes: int, simple_cnn_channels=(64, 128,
         return _build_densenet121(num_classes)
 
     raise ValueError(f"Unsupported model: {model_name}")
-

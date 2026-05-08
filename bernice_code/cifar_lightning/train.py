@@ -51,8 +51,25 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--accelerator", type=str, default=None)
     parser.add_argument("--devices", type=str, default=None)
     parser.add_argument("--precision", type=str, default=None)
+    parser.add_argument("--deterministic", type=str, choices=["true", "false", "warn"], default=None)
     parser.add_argument("--fast_dev_run", action="store_true")
     return parser.parse_args()
+
+
+def parse_deterministic(value: Any) -> bool | str:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        lowered = value.strip().lower()
+        if lowered == "true":
+            return True
+        if lowered == "false":
+            return False
+        if lowered == "warn":
+            return "warn"
+    if value is None:
+        return "warn"
+    return bool(value)
 
 
 def main() -> None:
@@ -60,10 +77,18 @@ def main() -> None:
     config_path = resolve_path(args.config, PROJECT_DIR)
     cfg = load_yaml(config_path)
 
-    if args.dataset is not None:
-        cfg["data"]["dataset"] = args.dataset
     if args.model is not None:
         cfg["model"]["name"] = args.model
+
+    # Apply model-specific training defaults first,
+    # then allow CLI args to override them.
+    model_name_for_override = str(cfg["model"]["name"]).lower().strip()
+    model_overrides = cfg.get("train_overrides", {}).get(model_name_for_override, {})
+    if model_overrides:
+        cfg["train"].update(model_overrides)
+
+    if args.dataset is not None:
+        cfg["data"]["dataset"] = args.dataset
     if args.max_epochs is not None:
         cfg["train"]["max_epochs"] = args.max_epochs
     if args.batch_size is not None:
@@ -90,9 +115,12 @@ def main() -> None:
         cfg["runtime"]["devices"] = args.devices
     if args.precision is not None:
         cfg["runtime"]["precision"] = args.precision
+    if args.deterministic is not None:
+        cfg["runtime"]["deterministic"] = args.deterministic
 
     seed = int(cfg["project"]["seed"])
     L.seed_everything(seed, workers=True)
+    torch.set_float32_matmul_precision("high")
 
     data_cfg = cfg["data"]
     data_module = CIFARDataModule(
@@ -148,12 +176,13 @@ def main() -> None:
     lr_monitor = LearningRateMonitor(logging_interval="epoch")
 
     runtime_cfg = cfg["runtime"]
+    deterministic_mode = parse_deterministic(runtime_cfg.get("deterministic", "warn"))
     trainer = L.Trainer(
         max_epochs=int(train_cfg["max_epochs"]),
         accelerator=runtime_cfg.get("accelerator", "auto"),
         devices=runtime_cfg.get("devices", "auto"),
         precision=runtime_cfg.get("precision", "32-true"),
-        deterministic=bool(runtime_cfg.get("deterministic", True)),
+        deterministic=deterministic_mode,
         logger=logger,
         callbacks=[checkpoint_callback, lr_monitor],
         log_every_n_steps=int(log_cfg.get("log_every_n_steps", 20)),
@@ -163,6 +192,14 @@ def main() -> None:
     print(f"Dataset: {dataset_name}")
     print(f"Model: {model_name}")
     print(f"Config: {config_path}")
+    print(
+        "Train Settings: "
+        f"epochs={train_cfg['max_epochs']}, "
+        f"optimizer={train_cfg.get('optimizer', 'adamw')}, "
+        f"lr={train_cfg['learning_rate']}, "
+        f"weight_decay={train_cfg['weight_decay']}, "
+        f"scheduler={train_cfg.get('scheduler', 'cosine')}"
+    )
 
     trainer.fit(lit_model, datamodule=data_module)
 
@@ -172,4 +209,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

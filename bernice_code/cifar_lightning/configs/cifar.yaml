@@ -24,6 +24,7 @@ train:
   optimizer: adamw
   scheduler: cosine
 
+
 logging:
   save_dir: ./logs
   name: cifar
@@ -40,5 +41,4 @@ runtime:
   accelerator: auto
   devices: auto
   precision: 32-true
-  deterministic: true
-
+  deterministic: warn
