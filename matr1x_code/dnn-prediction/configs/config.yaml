@@ -1,0 +1,42 @@
+project:
+  seed: 42
+  task_name: mnist-classification
+
+model:
+  name: mlp  # 取值: mlp 或 cnn
+  mlp:
+    hidden_dims: [256, 128]
+    dropout: 0.2
+  cnn:
+    conv_channels: [32, 64]
+    fc_hidden_dim: 128
+    dropout: 0.3
+
+data:
+  data_dir: ./data
+  batch_size: 64
+  num_workers: 4
+  val_split: 5000
+
+train:
+  max_epochs: 10
+  learning_rate: 0.001
+  weight_decay: 0.0001
+
+logging:
+  save_dir: ./logs
+  name: mnist
+  version: null
+  log_every_n_steps: 10
+
+checkpoint:
+  dirpath: ./checkpoints
+  monitor: val_acc
+  mode: max
+  save_top_k: 1
+
+runtime:
+  accelerator: auto
+  devices: auto
+  precision: 32-true
+  deterministic: true

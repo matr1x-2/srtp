@@ -1,0 +1,16 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+data/
+checkpoints/
+logs/
+lightning_logs/
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.tfevents.*
+
+.DS_Store
