@@ -1,6 +1,0 @@
-torch
-torchvision
-lightning
-pyyaml
-tensorboard
-
