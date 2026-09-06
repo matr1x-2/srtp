@@ -1,0 +1,25 @@
+{
+  "dataset": "/root/data/datasets/mind2web/test_domain-00000-of-00011-26c55c12cbbcdc8e.parquet",
+  "source_manifest": "/root/data/2026-08-27_mind2web-action-generation/data/clean_screenshots/manifest.jsonl",
+  "output_dir": "/root/data/2026-08-27_mind2web-action-generation/data/clean",
+  "manifest_path": "/root/data/2026-08-27_mind2web-action-generation/data/clean/manifest.jsonl",
+  "records": 370,
+  "crop_modes": {
+    "bbox_crop": 352,
+    "fallback_progress": 18,
+    "unchanged_height": 1
+  },
+  "crop_config": {
+    "bbox_top_padding_min": 220,
+    "bbox_top_padding_max": 760,
+    "bbox_top_padding_span_multiplier": 3.0,
+    "bbox_bottom_padding_min": 420,
+    "bbox_bottom_padding_max": 1280,
+    "bbox_bottom_padding_span_multiplier": 5.0,
+    "bbox_min_height": 960,
+    "fallback_min_height": 1080,
+    "fallback_max_height": 2200,
+    "fallback_height_ratio": 0.34
+  },
+  "average_height_reduction": 3502.03
+}
