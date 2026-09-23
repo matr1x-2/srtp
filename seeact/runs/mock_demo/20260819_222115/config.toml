@@ -1,0 +1,37 @@
+[basic]
+save_file_dir = "/root/fs/projects/seeact/runs/mock_demo"
+default_task = "Type 'web agent' into the input, click Submit, then terminate."
+default_website = "about:blank"
+crawler_mode = false
+crawler_max_steps = 10
+
+[agent]
+input_info = [ "screenshot",]
+grounding_strategy = "text_choice_som"
+max_auto_op = 50
+max_continuous_no_op = 5
+highlight = false
+
+[openai]
+rate_limit = -1
+model = "llava"
+temperature = 0
+api_key = "Your API key here"
+
+[browser]
+headless = true
+args = []
+browser_app = "chrome"
+persistant = false
+persistant_user_path = ""
+save_video = false
+tracing = false
+
+[browser.viewport]
+width = 1280
+height = 720
+
+[browser.trace]
+screenshots = true
+snapshots = true
+sources = true

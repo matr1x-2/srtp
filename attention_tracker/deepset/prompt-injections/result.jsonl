@@ -1,0 +1,6 @@
+{"model": "qwen2-attn", "seed": 0, "auc": 0.98, "auprc": 0.984, "fnr": 0.0, "fpr": 0.786}
+{"model": "phi3-attn", "seed": 0, "auc": 0.97, "auprc": 0.976, "fnr": 0.0, "fpr": 0.661}
+{"model": "mistral_7b-attn", "seed": 0, "auc": 0.986, "auprc": 0.988, "fnr": 0.017, "fpr": 0.304}
+{"model": "granite3_8b-attn", "seed": 0, "auc": 0.996, "auprc": 0.996, "fnr": 0.0, "fpr": 0.696}
+{"model": "gemma2_9b-attn", "seed": 0, "auc": 0.986, "auprc": 0.988, "fnr": 0.0, "fpr": 0.464}
+{"model": "dolphin_llama3_8b-attn", "seed": 0, "auc": 0.982, "auprc": 0.985, "fnr": 0.0, "fpr": 0.554}

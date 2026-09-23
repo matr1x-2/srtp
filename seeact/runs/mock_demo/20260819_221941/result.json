@@ -1,0 +1,12 @@
+{
+    "task": [
+        "Type 'web agent' into the input, click Submit, then terminate."
+    ],
+    "website": "about:blank",
+    "num_step": 3,
+    "action_history": [
+        "[input type=\"text\"] parent_node: Submit placeholder=\"Type query here\" -> TYPE: web agent",
+        "[html] Submit Typed: web agent -> CLICK",
+        "TERMINATE"
+    ]
+}

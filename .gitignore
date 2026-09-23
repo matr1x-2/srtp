@@ -22,3 +22,25 @@ data/
 .DS_Store
 Thumbs.db
 
+
+# Added by Bernice
+.venv/
+envs/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.log
+*.tmp
+.DS_Store
+*.tar.gz
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+
+# 大文件，GitHub 不接受
+vlm/outputs_independent_three_370_nojson_v2/attention_features.json
+vlm/mind2web_data/data/test_domain-00000-of-00011-26c55c12cbbcdc8e.parquet

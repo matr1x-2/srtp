@@ -1,0 +1,299 @@
+{
+  "status": "ok",
+  "phase": "phase1_image_only_clean_adv_classification",
+  "inputs": [
+    "/root/fs/ai/seeact_web_agent_study_artifacts/short_command_full_v1/eval/predictions.jsonl"
+  ],
+  "adv_policy": "successful_attacks",
+  "strict_image_only": true,
+  "model": {
+    "name": "CnnFeatureClassifier",
+    "architecture": "same as text HeatmapCNN, except Conv2d input channels are 3 instead of 1",
+    "feature_extractor": "Conv2d(3,16)-Conv2d(16,32)-Pool-Conv2d(32,64)-Conv2d(64,64)-Dropout2d-AvgPool(4,4)",
+    "classifier": "Flatten-Linear(1024,64)-ReLU-Dropout-Linear(64,2)",
+    "feature_shape": [
+      64,
+      4,
+      4
+    ],
+    "feature_dim": 1024,
+    "image_size": 224
+  },
+  "not_used_as_features": [
+    "attack_text",
+    "attack_goal",
+    "attack_type",
+    "style",
+    "success_rule",
+    "prompt",
+    "raw_response",
+    "plan",
+    "clean_predicted_action",
+    "attack_success"
+  ],
+  "selection_audit": {
+    "num_rows_read": 2590,
+    "num_images_selected": 491,
+    "skipped": {
+      "attack_not_selected": 2099
+    },
+    "note": "Only image_path and label are used by the model. Upstream metadata is used before training only for label assignment and successful attack filtering."
+  },
+  "num_examples": 491,
+  "label_counts": {
+    "clean": 370,
+    "adv": 121
+  },
+  "split": {
+    "mode": "group_split_70_15_15",
+    "grouping": "source_case_id",
+    "num_groups": 370,
+    "train_groups": 259,
+    "val_groups": 55,
+    "test_groups": 56
+  },
+  "split_label_counts": {
+    "train": {
+      "clean": 259,
+      "adv": 94
+    },
+    "val": {
+      "clean": 55,
+      "adv": 9
+    },
+    "test": {
+      "clean": 56,
+      "adv": 18
+    }
+  },
+  "training": {
+    "epochs": 20,
+    "batch_size": 32,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "device": "cuda:0",
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.7235698173133915,
+        "train_accuracy": 0.38243626062322944,
+        "train_f1": 0.3662790697674419,
+        "val_accuracy": 0.234375,
+        "val_f1": 0.26865671641791045
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.5739449897501354,
+        "train_accuracy": 0.8640226628895185,
+        "train_f1": 0.7037037037037038,
+        "val_accuracy": 0.9375,
+        "val_f1": 0.7142857142857143
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.3492940998617718,
+        "train_accuracy": 0.9348441926345609,
+        "train_f1": 0.8783068783068785,
+        "val_accuracy": 0.859375,
+        "val_f1": 0.0
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.2143205495461526,
+        "train_accuracy": 0.9603399433427762,
+        "train_f1": 0.9222222222222223,
+        "val_accuracy": 1.0,
+        "val_f1": 1.0
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.13782976698605265,
+        "train_accuracy": 0.9773371104815864,
+        "train_f1": 0.9587628865979382,
+        "val_accuracy": 0.78125,
+        "val_f1": 0.5625
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.12441562835876395,
+        "train_accuracy": 0.9830028328611898,
+        "train_f1": 0.9680851063829787,
+        "val_accuracy": 0.921875,
+        "val_f1": 0.782608695652174
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.06813376466941522,
+        "train_accuracy": 0.9886685552407932,
+        "train_f1": 0.9789473684210526,
+        "val_accuracy": 1.0,
+        "val_f1": 1.0
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.047690862130173206,
+        "train_accuracy": 0.9915014164305949,
+        "train_f1": 0.9837837837837838,
+        "val_accuracy": 1.0,
+        "val_f1": 1.0
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.03294075843970431,
+        "train_accuracy": 0.9943342776203966,
+        "train_f1": 0.9894736842105264,
+        "val_accuracy": 1.0,
+        "val_f1": 1.0
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.08756560211732096,
+        "train_accuracy": 0.9830028328611898,
+        "train_f1": 0.967741935483871,
+        "val_accuracy": 0.765625,
+        "val_f1": 0.5454545454545454
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.05666632111324129,
+        "train_accuracy": 0.9858356940509915,
+        "train_f1": 0.9738219895287958,
+        "val_accuracy": 0.375,
+        "val_f1": 0.3103448275862069
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.035764842482795545,
+        "train_accuracy": 0.9858356940509915,
+        "train_f1": 0.9740932642487047,
+        "val_accuracy": 0.859375,
+        "val_f1": 0.6666666666666666
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.018815340120549823,
+        "train_accuracy": 0.9971671388101983,
+        "train_f1": 0.9946524064171123,
+        "val_accuracy": 1.0,
+        "val_f1": 1.0
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.011090859282523045,
+        "train_accuracy": 1.0,
+        "train_f1": 1.0,
+        "val_accuracy": 1.0,
+        "val_f1": 1.0
+      },
+      {
+        "epoch": 15,
+        "train_loss": 0.008987336736779249,
+        "train_accuracy": 1.0,
+        "train_f1": 1.0,
+        "val_accuracy": 1.0,
+        "val_f1": 1.0
+      },
+      {
+        "epoch": 16,
+        "train_loss": 0.0067417956519312625,
+        "train_accuracy": 0.9971671388101983,
+        "train_f1": 0.9947089947089947,
+        "val_accuracy": 1.0,
+        "val_f1": 1.0
+      },
+      {
+        "epoch": 17,
+        "train_loss": 0.005382943684489152,
+        "train_accuracy": 1.0,
+        "train_f1": 1.0,
+        "val_accuracy": 1.0,
+        "val_f1": 1.0
+      },
+      {
+        "epoch": 18,
+        "train_loss": 0.005193295479665059,
+        "train_accuracy": 1.0,
+        "train_f1": 1.0,
+        "val_accuracy": 1.0,
+        "val_f1": 1.0
+      },
+      {
+        "epoch": 19,
+        "train_loss": 0.024068318523740972,
+        "train_accuracy": 0.9971671388101983,
+        "train_f1": 0.9946524064171123,
+        "val_accuracy": 1.0,
+        "val_f1": 1.0
+      },
+      {
+        "epoch": 20,
+        "train_loss": 0.01650287014651231,
+        "train_accuracy": 0.9943342776203966,
+        "train_f1": 0.9894736842105264,
+        "val_accuracy": 1.0,
+        "val_f1": 1.0
+      }
+    ]
+  },
+  "evaluations": {
+    "train": {
+      "label_counts": {
+        "clean": 259,
+        "adv": 94
+      },
+      "cnn_feature_classifier": {
+        "num_examples": 353,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "tn": 259,
+        "fp": 0,
+        "fn": 0,
+        "tp": 94
+      }
+    },
+    "val": {
+      "label_counts": {
+        "clean": 55,
+        "adv": 9
+      },
+      "cnn_feature_classifier": {
+        "num_examples": 64,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "tn": 55,
+        "fp": 0,
+        "fn": 0,
+        "tp": 9
+      }
+    },
+    "test": {
+      "label_counts": {
+        "clean": 56,
+        "adv": 18
+      },
+      "cnn_feature_classifier": {
+        "num_examples": 74,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "tn": 56,
+        "fp": 0,
+        "fn": 0,
+        "tp": 18
+      }
+    }
+  },
+  "elapsed_seconds": 101.555,
+  "outputs": {
+    "dataset_csv": "/root/fs/ai/seeact_web_agent_study_artifacts/short_command_full_v1/phase1_classification/phase1_dataset.csv",
+    "predictions_csv": "/root/fs/ai/seeact_web_agent_study_artifacts/short_command_full_v1/phase1_classification/phase1_predictions.csv",
+    "features_npz": "/root/fs/ai/seeact_web_agent_study_artifacts/short_command_full_v1/phase1_classification/phase1_cnn_features.npz",
+    "model_pt": "/root/fs/ai/seeact_web_agent_study_artifacts/short_command_full_v1/phase1_classification/phase1_cnn_classifier.pt",
+    "selection_audit_jsonl": "/root/fs/ai/seeact_web_agent_study_artifacts/short_command_full_v1/phase1_classification/phase1_selection_audit.jsonl"
+  }
+}

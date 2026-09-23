@@ -1,0 +1,69 @@
+[
+    {
+        "action_generation": "I see the input field and the submit button. I should type into the input first.",
+        "action_grounding": "ELEMENT: A ACTION: TYPE VALUE: web agent",
+        "element": {
+            "center_point": [
+                0.175,
+                0.083
+            ],
+            "description": "parent_node: Submit placeholder=\"Type query here\"",
+            "tag_with_role": "input type=\"text\"",
+            "box_raw": [
+                40,
+                40,
+                368,
+                40
+            ],
+            "box": [
+                40,
+                40,
+                408,
+                80
+            ],
+            "selector": "<Locator frame=<Frame name= url='data:text/html;charset=utf-8,%3C%21doctype%20html%3E%0A%3Chtml%3E%0A%3Chead%3E%0A%20%20%3Cmeta%20charset%3D%27utf-8%27%3E%0A%20%20%3Ctitle%3ESeeAct%20Demo%3C/title%3E%0A%20%20%3Cstyle%3E%0A%20%20%20%20body%20%7B%20font-family%3A%20sans-serif%3B%20margin%3A%2040px%3B%20%7D%0A%20%20%20%20%23query%20%7B%20display%3A%20block%3B%20width%3A%20360px%3B%20height%3A%2034px%3B%20margin-bottom%3A%2014px%3B%20%7D%0A%20%20%20%20%23submit%20%7B%20display%3A%20block%3B%20width%3A%20120px%3B%20height%3A%2036px%3B%20%7D%0A%20%20%20%20%23result%20%7B%20margin-top%3A%2020px%3B%20font-size%3A%2018px%3B%20%7D%0A%20%20%3C/style%3E%0A%3C/head%3E%0A%3Cbody%3E%0A%20%20%3Cinput%20id%3D%27query%27%20type%3D%27text%27%20placeholder%3D%27Type%20query%20here%27%0A%20%20%20%20%20%20%20%20%20oninput%3D%22document.getElementById%28%27result%27%29.textContent%20%3D%20%27Typed%3A%20%27%20%2B%20this.value%3B%22%3E%0A%20%20%3Cbutton%20id%3D%27submit%27%20type%3D%27button%27%0A%20%20%20%20%20%20%20%20%20%20onclick%3D%22document.getElementById%28%27result%27%29.textContent%20%3D%20%27Submitted%3A%20%27%20%2B%20document.getElementById%28%27query%27%29.value%3B%22%3E%0A%20%20%20%20Submit%0A%20%20%3C/button%3E%0A%20%20%3Cdiv%20id%3D%27result%27%3EResult%3A%20pending%3C/div%3E%0A%3C/body%3E%0A%3C/html%3E'> selector='input >> nth=0'>",
+            "tag": "input",
+            "idx": 0,
+            "option": "A"
+        },
+        "action": "TYPE",
+        "value": "web agent"
+    },
+    {
+        "action_generation": "The text is in the field now. I should submit it by clicking the button.",
+        "action_grounding": "ELEMENT: C ACTION: CLICK",
+        "element": {
+            "center_point": [
+                0.078,
+                0.156
+            ],
+            "description": "Submit",
+            "tag_with_role": "button type=\"button\"",
+            "box_raw": [
+                40,
+                94,
+                120,
+                36
+            ],
+            "box": [
+                40,
+                94,
+                160,
+                130
+            ],
+            "selector": "<Locator frame=<Frame name= url='data:text/html;charset=utf-8,%3C%21doctype%20html%3E%0A%3Chtml%3E%0A%3Chead%3E%0A%20%20%3Cmeta%20charset%3D%27utf-8%27%3E%0A%20%20%3Ctitle%3ESeeAct%20Demo%3C/title%3E%0A%20%20%3Cstyle%3E%0A%20%20%20%20body%20%7B%20font-family%3A%20sans-serif%3B%20margin%3A%2040px%3B%20%7D%0A%20%20%20%20%23query%20%7B%20display%3A%20block%3B%20width%3A%20360px%3B%20height%3A%2034px%3B%20margin-bottom%3A%2014px%3B%20%7D%0A%20%20%20%20%23submit%20%7B%20display%3A%20block%3B%20width%3A%20120px%3B%20height%3A%2036px%3B%20%7D%0A%20%20%20%20%23result%20%7B%20margin-top%3A%2020px%3B%20font-size%3A%2018px%3B%20%7D%0A%20%20%3C/style%3E%0A%3C/head%3E%0A%3Cbody%3E%0A%20%20%3Cinput%20id%3D%27query%27%20type%3D%27text%27%20placeholder%3D%27Type%20query%20here%27%0A%20%20%20%20%20%20%20%20%20oninput%3D%22document.getElementById%28%27result%27%29.textContent%20%3D%20%27Typed%3A%20%27%20%2B%20this.value%3B%22%3E%0A%20%20%3Cbutton%20id%3D%27submit%27%20type%3D%27button%27%0A%20%20%20%20%20%20%20%20%20%20onclick%3D%22document.getElementById%28%27result%27%29.textContent%20%3D%20%27Submitted%3A%20%27%20%2B%20document.getElementById%28%27query%27%29.value%3B%22%3E%0A%20%20%20%20Submit%0A%20%20%3C/button%3E%0A%20%20%3Cdiv%20id%3D%27result%27%3EResult%3A%20pending%3C/div%3E%0A%3C/body%3E%0A%3C/html%3E'> selector='button >> nth=0'>",
+            "tag": "button",
+            "idx": 2,
+            "option": "C"
+        },
+        "action": "CLICK",
+        "value": ""
+    },
+    {
+        "action_generation": "The page shows the submitted result. The task is done.",
+        "action_grounding": "ACTION: TERMINATE",
+        "element": null,
+        "action": "TERMINATE",
+        "value": ""
+    }
+]
